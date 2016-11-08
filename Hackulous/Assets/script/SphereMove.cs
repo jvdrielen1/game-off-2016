@@ -15,6 +15,10 @@ public class SphereMove : MonoBehaviour {
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
 
+        if (horizontal != 0) {
+            vertical = 0;
+        }
+
 		transform.position = new Vector3 (transform.position.x + horizontal * Time.deltaTime * speed, transform.position.y + vertical * Time.deltaTime * speed, 0);
 	}
 }
