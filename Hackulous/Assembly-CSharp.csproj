@@ -45,8 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\script\Drag.cs" />
      <Compile Include="Assets\script\SphereMove.cs" />
      <Compile Include="Assets\script\splash\IntroFade.cs" />
+     <None Include="Assets\font\Ubuntu_Mono\UFL.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

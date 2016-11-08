@@ -42,6 +42,7 @@ public class IntroFade : MonoBehaviour {
 	void OnGUI(){
 		Color color = GUI.color;
 		color.a = imageAlpha;
+
 		GUI.color = color;
 		GUI.DrawTexture (centerRect, image, ScaleMode.StretchToFill);
 
