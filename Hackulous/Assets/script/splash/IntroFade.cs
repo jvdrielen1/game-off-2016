@@ -19,7 +19,6 @@ public class IntroFade : MonoBehaviour {
 	private float imageAlpha = 0.0f;
 	private Image img;
 
-	// Use this for initialization
 	void Start () {
 		centerRect = new Rect (new Vector2 (0, 0), new Vector2 (Screen.width, Screen.height));
 		centerBottomRect = new Rect (new Vector2 (0, 0), new Vector2 (Screen.width, Screen.height));
@@ -33,7 +32,11 @@ public class IntroFade : MonoBehaviour {
 			int lCurrent = currentText.Length;
 
 			if (lCurrent < lFull)
-				currentText += text.ToCharArray()[lCurrent];
+				currentText += text.ToCharArray () [lCurrent];
+			else {
+				GameObject obj = GameObject.Find("Main Camera");
+				obj.GetComponent<SwitchScene>().openScene("PCScene");
+			}
 		}
 
 		imageAlpha += 0.01f;
