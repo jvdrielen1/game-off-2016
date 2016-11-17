@@ -52,6 +52,8 @@
      <Compile Include="Assets\script\composer\Composer.cs" />
      <Compile Include="Assets\script\composer\command\CommandExecutor.cs" />
      <Compile Include="Assets\script\composer\command\HelpCommand.cs" />
+     <Compile Include="Assets\script\composer\key\BackspaceAction.cs" />
+     <Compile Include="Assets\script\composer\key\KeyAction.cs" />
      <Compile Include="Assets\script\splash\IntroFade.cs" />
      <None Include="Assets\font\Ubuntu_Mono\UFL.txt" />
  <Reference Include="UnityEngine.UI">

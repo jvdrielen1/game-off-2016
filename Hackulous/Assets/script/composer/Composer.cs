@@ -113,7 +113,7 @@ public class Composer : MonoBehaviour {
 	}
 
 	public void CalculateLines(){
-		// Max 27 lines
+		// Max 26 lines
 		string[] sentences = currentText.Split(new string[]{"\n"}, StringSplitOptions.None);
 		List<string> sentenceList = new List<string> (sentences);
 
@@ -133,6 +133,15 @@ public class Composer : MonoBehaviour {
 		}
 
 		Debug.Log (sentenceList.Count);
+	}
+
+	public String getCurrentText(){
+		return this.currentText;
+	}
+
+	public void setCurrentText(string text){
+		this.currentText = text;
+		GetComponent<Text> ().text = this.currentText + (Mathf.Round (Time.time) % 2 == 0 ? "▇" : "");
 	}
 
 }
