@@ -64,7 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\script\Drag.cs" />
+    <Compile Include="Assets\script\GameManager.cs" />
     <Compile Include="Assets\script\SphereMove.cs" />
+    <Compile Include="Assets\script\SwitchScene.cs" />
+    <Compile Include="Assets\script\composer\Composer.cs" />
     <Compile Include="Assets\script\splash\IntroFade.cs" />
   </ItemGroup>
   <ItemGroup>
