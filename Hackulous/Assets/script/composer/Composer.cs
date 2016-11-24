@@ -8,6 +8,8 @@ public class Composer : MonoBehaviour {
 
 	public float textSpeed = 0.01f;
 
+	private bool canType = false;
+
 	private string text = "> Loading components..\n> Initializing server side applications\n> Connecting to database.\n> ...\n> Connected\n\n";
 	private string currentText = "";
 
@@ -15,12 +17,20 @@ public class Composer : MonoBehaviour {
 
 	private float nextChar = 0.0f;
 
-	private Dictionary<string, CommandExecutor> executor = new Dictionary<string, CommandExecutor> ();
+	private Dictionary<string, CommandExecutor> commandExec = new Dictionary<string, CommandExecutor> ();
+	private Dictionary<string, KeyAction> keyActions = new Dictionary<string, KeyAction> ();
 
 	void Start () {
 		GetComponent<Text> ().text = "";
 
+		// Register commands
 		registerCommand ("help", new HelpCommand());
+		registerCommand ("hack", new HackCommand());
+
+		// Register key actions
+		registerKeyAction ("backspace", new BackspaceAction());
+		registerKeyAction ("return", new ReturnAction());
+		registerKeyAction ("space", new SpaceAction());
 	}
 
 	void Update () {
@@ -34,12 +44,16 @@ public class Composer : MonoBehaviour {
 
 			currentLength++;
 
-			GetComponent<Text> ().text = this.currentText + (Mathf.Round(Time.time) % 2 == 0 ? "▇" : "");
+			GetComponent<Text> ().text = this.currentText + (Mathf.Round (Time.time) % 2 == 0 ? "▇" : "");
 
 			nextChar = Time.time + textSpeed;
+
+			if (currentLength == fullLength)
+				canType = true;
 		}
 
-		detectPressedKeyOrButton ();
+		if (canType)
+			detectPressedKeyOrButton ();
 	}
 
 	public void fillText(string text){
@@ -47,61 +61,58 @@ public class Composer : MonoBehaviour {
 	}
 
 	public void registerCommand(string command, CommandExecutor exec){
-		executor[command] = exec;
+		commandExec[command] = exec;
 	}
 
-	List<string> filter = new List<string> (){
-		"mouse0","mouse1", "leftshift", "rightshift"
-	};
+	public void registerKeyAction(string key, KeyAction exec){
+		keyActions[key] = exec;
+	}
 
 	public void detectPressedKeyOrButton() {
 		foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
 		{
 			if (Input.GetKeyUp (kcode)) {
-				//Debug.Log ("KeyCode down: " + kcode);
 				Type (kcode.ToString());
 				GetComponent<Text> ().text = this.currentText + (Mathf.Round(Time.time) % 2 == 0 ? "▇" : "");
 			}
 		}
 	}
 
+	public void StartEvent(ComposerEvent e){
+		e.Run ();
+	}
+
 	void Type(String s){
 		s = s.ToLower ();
 
-		if (s == "return") {
-			string[] sentences = currentText.Split(new string[]{"\n"}, StringSplitOptions.None);
-			string command = sentences [sentences.Length-1];
+		// Todo alpha/keypad
+		if (s.StartsWith("alpha")){
+			s = s.Replace ("alpha", "");
+		} else if (s.StartsWith("keypad")){
+			s = s.Replace ("keypad", "");
+		}
 
-			if (command != "") {
-				ExecuteCommand (command);
+		Debug.Log (s);
+
+		if (keyActions.ContainsKey (s)) {
+			if (keyActions [s].Execute(this)) {
+				return;
 			}
-
-			currentText += "\n";
-			CalculateLines ();
-			return;
 		}
 
-		if (s == "space") {
-			currentText += " ";
-			return;
-		}
-
-		if (s == "backspace") {
-			currentText = currentText.Substring (0, currentText.Length - 1);
-			return;
-		}
-
-		if (filter.Contains (s)) {
+		if (s.Length > 1) {
 			return;
 		}
 
 		currentText += s;
 	}
 
-	void ExecuteCommand(string cmd){
+	public void ExecuteCommand(string cmd){
 		string[] args = cmd.Split(new string[]{" "}, StringSplitOptions.None);
-		if (executor.ContainsKey (args[0])) {
-			executor [args [0]].Execute (args[0], args);
+		if (commandExec.ContainsKey (args[0])) {
+			if (!commandExec [args [0]].Execute (args [0], args, this)) {
+				currentText += "\n> Command usage: " + commandExec [args [0]].Usage ();
+			};
 		} else {
 			currentText += "\n> Command not found";
 		}
@@ -131,8 +142,6 @@ public class Composer : MonoBehaviour {
 			}
 			GetComponent<Text> ().text = this.currentText + (Mathf.Round (Time.time) % 2 == 0 ? "▇" : "");
 		}
-
-		Debug.Log (sentenceList.Count);
 	}
 
 	public String getCurrentText(){
@@ -142,6 +151,14 @@ public class Composer : MonoBehaviour {
 	public void setCurrentText(string text){
 		this.currentText = text;
 		GetComponent<Text> ().text = this.currentText + (Mathf.Round (Time.time) % 2 == 0 ? "▇" : "");
+	}
+
+	public bool hasTypePermission(){
+		return this.canType;
+	}
+
+	public void setTypePermission(bool b){
+		this.canType = b;
 	}
 
 }

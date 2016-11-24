@@ -68,6 +68,10 @@
     <Compile Include="Assets\script\SphereMove.cs" />
     <Compile Include="Assets\script\SwitchScene.cs" />
     <Compile Include="Assets\script\composer\Composer.cs" />
+    <Compile Include="Assets\script\composer\command\CommandExecutor.cs" />
+    <Compile Include="Assets\script\composer\command\HelpCommand.cs" />
+    <Compile Include="Assets\script\composer\key\BackspaceAction.cs" />
+    <Compile Include="Assets\script\composer\key\KeyAction.cs" />
     <Compile Include="Assets\script\splash\IntroFade.cs" />
   </ItemGroup>
   <ItemGroup>
