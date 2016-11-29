@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HelpCommand : CommandExecutor {
 
@@ -10,8 +11,9 @@ public class HelpCommand : CommandExecutor {
 
 		print ("> Hackulous Help");
 		print ("- Commands:");
-		print ("   help : Display all commands");
-		print ("   hack : Start hacking");
+		foreach (KeyValuePair<string, CommandExecutor> entry in composer.getCommands()){		
+			print ("   " + entry.Key + " : " + entry.Value.Usage());
+		}
 		return true;
 	}
 

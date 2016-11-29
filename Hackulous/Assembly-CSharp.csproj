@@ -47,6 +47,8 @@
   <ItemGroup>
      <Compile Include="Assets\script\Drag.cs" />
      <Compile Include="Assets\script\GameManager.cs" />
+     <Compile Include="Assets\script\Player.cs" />
+     <Compile Include="Assets\script\SaveGame.cs" />
      <Compile Include="Assets\script\SphereMove.cs" />
      <Compile Include="Assets\script\SwitchScene.cs" />
      <Compile Include="Assets\script\composer\Composer.cs" />
@@ -54,11 +56,15 @@
      <Compile Include="Assets\script\composer\command\CommandExecutor.cs" />
      <Compile Include="Assets\script\composer\command\HackCommand.cs" />
      <Compile Include="Assets\script\composer\command\HelpCommand.cs" />
+     <Compile Include="Assets\script\composer\command\StatisticsCommand.cs" />
      <Compile Include="Assets\script\composer\key\BackspaceAction.cs" />
      <Compile Include="Assets\script\composer\key\KeyAction.cs" />
      <Compile Include="Assets\script\composer\key\ReturnAction.cs" />
      <Compile Include="Assets\script\composer\key\SpaceAction.cs" />
+     <Compile Include="Assets\script\hack\Hack.cs" />
+     <Compile Include="Assets\script\hack\HackType.cs" />
      <Compile Include="Assets\script\splash\IntroFade.cs" />
+     <Compile Include="Assets\script\upgrade\UpgradeManager.cs" />
      <None Include="Assets\font\Ubuntu_Mono\UFL.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

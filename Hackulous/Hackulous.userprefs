@@ -1,6 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\composer\command\HackCommand.cs">
+    <Files>
+      <File FileName="Assets\script\composer\Composer.cs" Line="75" Column="27" />
+      <File FileName="Assets\script\composer\command\CommandExecutor.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\composer\command\HackCommand.cs" Line="69" Column="15" />
+      <File FileName="Assets\script\composer\key\ReturnAction.cs" Line="19" Column="16" />
+      <File FileName="Assets\script\composer\ComposerEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\hack\Hack.cs" Line="53" Column="23" />
+      <File FileName="Assets\script\hack\HackType.cs" Line="6" Column="11" />
+      <File FileName="Assets\script\GameManager.cs" Line="16" Column="165" />
+      <File FileName="Assets\script\Player.cs" Line="52" Column="23" />
+      <File FileName="Assets\script\composer\command\StatisticsCommand.cs" Line="11" Column="14" />
+      <File FileName="Assets\script\composer\command\HelpCommand.cs" Line="23" Column="2" />
+      <File FileName="Assets\script\SaveGame.cs" Line="14" Column="17" />
+      <File FileName="Assets\script\upgrade\UpgradeManager.cs" Line="17" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

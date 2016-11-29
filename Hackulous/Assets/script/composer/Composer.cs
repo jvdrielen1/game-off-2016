@@ -26,10 +26,12 @@ public class Composer : MonoBehaviour {
 		// Register commands
 		registerCommand ("help", new HelpCommand());
 		registerCommand ("hack", new HackCommand());
+		registerCommand ("stats", new StatisticsCommand());
 
 		// Register key actions
 		registerKeyAction ("backspace", new BackspaceAction());
 		registerKeyAction ("return", new ReturnAction());
+		registerKeyAction ("enter", new ReturnAction());
 		registerKeyAction ("space", new SpaceAction());
 	}
 
@@ -48,8 +50,9 @@ public class Composer : MonoBehaviour {
 
 			nextChar = Time.time + textSpeed;
 
-			if (currentLength == fullLength)
+			if (currentLength == fullLength) {
 				canType = true;
+			}
 		}
 
 		if (canType)
@@ -68,6 +71,10 @@ public class Composer : MonoBehaviour {
 		keyActions[key] = exec;
 	}
 
+	public Dictionary<string, CommandExecutor> getCommands(){
+		return this.commandExec;
+	}
+
 	public void detectPressedKeyOrButton() {
 		foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
 		{
@@ -79,8 +86,10 @@ public class Composer : MonoBehaviour {
 	}
 
 	public void StartEvent(ComposerEvent e){
-		e.Run ();
+		StartCoroutine (e.Run());
 	}
+
+	
 
 	void Type(String s){
 		s = s.ToLower ();

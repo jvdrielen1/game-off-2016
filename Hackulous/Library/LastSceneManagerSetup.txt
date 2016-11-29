@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scene/TextComposerScene.unity
+- path: Assets/scene/IntroScene.unity
   isLoaded: 1
   isActive: 1

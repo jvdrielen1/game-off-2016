@@ -15,6 +15,9 @@ public class ReturnAction : KeyAction {
 			composer.ExecuteCommand (command);
 		}
 
+		if (!composer.hasTypePermission())
+			return true;
+
 		composer.setCurrentText (composer.getCurrentText() + "\n");
 		composer.CalculateLines();
 		return true;
