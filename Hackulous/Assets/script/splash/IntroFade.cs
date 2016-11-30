@@ -25,6 +25,7 @@ public class IntroFade : MonoBehaviour {
 	}
 
 	void Update(){
+		Player player = GameManager.Instance ().getPlayer ();
 		if (lastType < Time.time) {
 			lastType += typeRate;
 
@@ -35,7 +36,11 @@ public class IntroFade : MonoBehaviour {
 				currentText += text.ToCharArray () [lCurrent];
 			else {
 				GameObject obj = GameObject.Find("Main Camera");
-				obj.GetComponent<SwitchScene>().openScene("PCScene");
+				if (player.isFirstTime) {
+					obj.GetComponent<SwitchScene> ().openScene ("FirsttimeScene");
+				} else {
+					obj.GetComponent<SwitchScene> ().openScene ("PCScene");
+				}
 			}
 		}
 

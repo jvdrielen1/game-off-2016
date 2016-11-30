@@ -16,6 +16,12 @@ public class SwitchScene : MonoBehaviour {
 	}
 
 	public void openScene(string scene){
+		if (scene == "PCScene") {
+			Player player = GameManager.Instance ().getPlayer ();
+			player.isFirstTime = false;
+			SaveGame.Save ();
+		}
+
 		try {
 			fade();
 			SceneManager.LoadScene (scene);

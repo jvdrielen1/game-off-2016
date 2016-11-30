@@ -13,8 +13,9 @@ public class HackCommand : CommandExecutor {
 		composer.setTypePermission(false);
 
 		GameManager gm = GameManager.Instance ();
+		HackManager hm = HackManager.Instance ();
 		Player player = gm.getPlayer ();
-		List<Hack> hacks = gm.getHacks ();
+		List<Hack> hacks = hm.getHacksForPlayer(player);
 
 		if (args.Length == 2) {
 			string id = args [1];
@@ -99,8 +100,12 @@ public class HackCommand : CommandExecutor {
 					composer.setCurrentText (composer.getCurrentText () + "]\n");
 					composer.setTypePermission (true);
 					Player player = GameManager.Instance ().getPlayer ();
-					player.setBalance (player.getBalance() + hack.getReward());
-					SaveGame.Save ();
+					/*player.setBalance (player.getBalance() + hack.getReward());
+					player.completeHack (hack.getId ());
+					player.addXp (50);
+					composer.CalculateLines ();
+					SaveGame.Save ();*/
+					GameManager.Instance ().saveComposerState (composer.getCurrentText());
 					yield break;
 				}
 

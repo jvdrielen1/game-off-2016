@@ -12,10 +12,14 @@ public class StatisticsCommand : CommandExecutor {
 
 		print ("> Hackulous Statistics");
 		print ("  - Player Name: " + player.getName());
+		print ("  - Level: " + player.getPlayerLevel());
+		print ("  - Level progress: " + player.getXpPercentage() + "%");
+		print ("  - XP: " + player.getXp());
+		print ("  - XP needed: " + player.getXpNextLevel());
 		print ("  - Balance: " + player.getBalance() + "$");
 		print ("  -------");
 		print ("  - Hacks type: " + player.getHackType());
-		print ("  - Hacks executed: 5");
+		print ("  - Hacks executed: " + player.getCompletedHacks().Count);
 		return true;
 	}
 

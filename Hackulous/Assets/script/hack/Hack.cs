@@ -49,6 +49,10 @@ public class Hack {
 		return this.reward;
 	}
 
+	public int getMinLevel(){
+		return this.minLevel;
+	}
+
 	public bool canHack(Player player){
 		return (player.getLevel ("cpu") >= minCpuLevel) && (player.getLevel ("ram") >= minRamLevel);
 	}

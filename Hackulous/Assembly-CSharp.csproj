@@ -61,9 +61,13 @@
      <Compile Include="Assets\script\composer\key\KeyAction.cs" />
      <Compile Include="Assets\script\composer\key\ReturnAction.cs" />
      <Compile Include="Assets\script\composer\key\SpaceAction.cs" />
+     <Compile Include="Assets\script\database\HackingDatabase.cs" />
      <Compile Include="Assets\script\hack\Hack.cs" />
+     <Compile Include="Assets\script\hack\HackManager.cs" />
+     <Compile Include="Assets\script\hack\HackPlayer.cs" />
      <Compile Include="Assets\script\hack\HackType.cs" />
      <Compile Include="Assets\script\splash\IntroFade.cs" />
+     <Compile Include="Assets\script\startup\StartUp.cs" />
      <Compile Include="Assets\script\upgrade\UpgradeManager.cs" />
      <None Include="Assets\font\Ubuntu_Mono\UFL.txt" />
  <Reference Include="UnityEngine.UI">

@@ -22,7 +22,7 @@ public class SaveGame {
 			GameManager.Instance ().setPlayer ((Player)bf.Deserialize (file));
 			file.Close ();
 		} else {
-			GameManager.Instance ().setPlayer (new Player("Unknown", 0));
+			GameManager.Instance ().setPlayer (new Player("Unknown", 1000));
 		}
 	}
 

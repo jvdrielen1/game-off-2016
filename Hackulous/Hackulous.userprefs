@@ -1,24 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\composer\command\HackCommand.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\composer\Composer.cs">
     <Files>
-      <File FileName="Assets\script\composer\Composer.cs" Line="75" Column="27" />
-      <File FileName="Assets\script\composer\command\CommandExecutor.cs" Line="1" Column="1" />
-      <File FileName="Assets\script\composer\command\HackCommand.cs" Line="69" Column="15" />
-      <File FileName="Assets\script\composer\key\ReturnAction.cs" Line="19" Column="16" />
-      <File FileName="Assets\script\composer\ComposerEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\script\hack\Hack.cs" Line="53" Column="23" />
-      <File FileName="Assets\script\hack\HackType.cs" Line="6" Column="11" />
-      <File FileName="Assets\script\GameManager.cs" Line="16" Column="165" />
-      <File FileName="Assets\script\Player.cs" Line="52" Column="23" />
-      <File FileName="Assets\script\composer\command\StatisticsCommand.cs" Line="11" Column="14" />
-      <File FileName="Assets\script\composer\command\HelpCommand.cs" Line="23" Column="2" />
-      <File FileName="Assets\script\SaveGame.cs" Line="14" Column="17" />
-      <File FileName="Assets\script\upgrade\UpgradeManager.cs" Line="17" Column="32" />
+      <File FileName="Assets\script\composer\command\HackCommand.cs" Line="108" Column="74" />
+      <File FileName="Assets\script\hack\HackType.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\GameManager.cs" Line="35" Column="18" />
+      <File FileName="Assets\script\Player.cs" Line="96" Column="29" />
+      <File FileName="Assets\script\hack\HackManager.cs" Line="35" Column="52" />
+      <File FileName="Assets\script\hack\Hack.cs" Line="36" Column="35" />
+      <File FileName="Assets\script\composer\command\StatisticsCommand.cs" Line="16" Column="57" />
+      <File FileName="Assets\script\database\HackingDatabase.cs" Line="11" Column="56" />
+      <File FileName="Assets\script\hack\HackPlayer.cs" Line="47" Column="23" />
+      <File FileName="Assets\script\composer\Composer.cs" Line="50" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <RunToCursorBreakpoint file="F:\UnityGamejam\game-off-2016\Hackulous\Assets\script\composer\Composer.cs" line="54" column="14" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

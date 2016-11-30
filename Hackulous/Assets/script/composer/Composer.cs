@@ -20,22 +20,43 @@ public class Composer : MonoBehaviour {
 	private Dictionary<string, CommandExecutor> commandExec = new Dictionary<string, CommandExecutor> ();
 	private Dictionary<string, KeyAction> keyActions = new Dictionary<string, KeyAction> ();
 
+	private GameObject continueButton;
+
 	void Start () {
+		GameManager gm = GameManager.Instance ();
+		Player player = gm.getPlayer ();
+
+		if (player.isFirstTime) {
+			continueButton = GameObject.Find ("ContinueButton");
+			continueButton.SetActive(false);
+		}
+
 		GetComponent<Text> ().text = "";
 
-		// Register commands
-		registerCommand ("help", new HelpCommand());
-		registerCommand ("hack", new HackCommand());
-		registerCommand ("stats", new StatisticsCommand());
+		if (player.isFirstTime) {
+			setTypePermission (false);
+			text = "> Booting up Hackulous OS V.II\n> Boot completed!\n> Validating Hackulous server details and requiring IP addresses.\n> Completed, welcome to Hackulous \"UNKNOWN\"\n\n???: Since you're a starting hacker, let me explain the basics.\n???: Hackulous is an advanced hacking operating system used by all sorts of hackers around the world!\n???: Starting today you're able to start your own hacking emperium.\n???: Since you were highly recommended on dark forums I will give you a start budget of $1000 to buy basic hardware.\n???: Access the terminal to start hacking business, websites, file servers, databases and entire networks.\n???: ....\n???: Just a tip, open the terminal and try to use the command \"help\" to get started.\n\n???: Goodluck.\n\n> Encrypted online chat terminated.";
+		} else {
+			// Register commands
+			registerCommand ("help", new HelpCommand ());
+			registerCommand ("hack", new HackCommand ());
+			registerCommand ("stats", new StatisticsCommand ());
+		}
 
 		// Register key actions
 		registerKeyAction ("backspace", new BackspaceAction());
 		registerKeyAction ("return", new ReturnAction());
 		registerKeyAction ("enter", new ReturnAction());
 		registerKeyAction ("space", new SpaceAction());
+
+		if (gm.hasComposerSaveState ()) {
+			setCurrentText(gm.getComposerSaveState());
+			gm.removeSaveState ();
+		}
 	}
 
 	void Update () {
+		Player player = GameManager.Instance ().getPlayer ();
 		if (text != "" && (nextChar <= Time.time)) {
 			
 			int fullLength = text.Length;
@@ -51,7 +72,11 @@ public class Composer : MonoBehaviour {
 			nextChar = Time.time + textSpeed;
 
 			if (currentLength == fullLength) {
-				canType = true;
+				if (player.isFirstTime) {
+					continueButton.SetActive(true);
+				} else {
+					canType = true;
+				}
 			}
 		}
 

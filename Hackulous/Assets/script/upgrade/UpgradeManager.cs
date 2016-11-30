@@ -4,7 +4,7 @@ using System.Collections;
 
 public class UpgradeManager : MonoBehaviour {
 
-	public GameObject cpuText, ramText, coolingText;
+	public GameObject cpuText, ramText, coolingText, balanceText;
 	private int firstCost = 650;
 
 	void Start(){
@@ -13,8 +13,11 @@ public class UpgradeManager : MonoBehaviour {
 
 	public void Upgrade(string type){
 		Player player = GameManager.Instance ().getPlayer ();
-		player.levelUp (type);
-		// TODO LET IT TAKE THE MONEY
+		if (player.getBalance () >= getUpgradeCost (type)) {
+			player.setBalance (player.getBalance () - getUpgradeCost (type));
+			player.levelUp (type);
+			SaveGame.Save ();
+		}
 		UpdateText ();
 	}
 
@@ -23,6 +26,7 @@ public class UpgradeManager : MonoBehaviour {
 		cpuText.GetComponent<Text> ().text = "CPU Level: " + player.getLevel ("cpu") + "\nCost: " + getUpgradeCost("cpu");
 		ramText.GetComponent<Text> ().text = "RAM Level: " + player.getLevel ("ram") + "\nCost: " + getUpgradeCost("ram");
 		coolingText.GetComponent<Text> ().text = "Cooling Level: " + player.getLevel ("cooling") + "\nCost: " + getUpgradeCost("cooling");
+		balanceText.GetComponent<Text> ().text = "Money: $" + player.getBalance();
 	} 
 
 	public int getUpgradeCost(string type){
