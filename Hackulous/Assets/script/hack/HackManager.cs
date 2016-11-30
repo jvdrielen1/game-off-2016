@@ -7,6 +7,9 @@ public class HackManager {
 	private static HackManager instance;
 
 	private List<Hack> hacks = new List<Hack> ();
+	private bool latestSuccesfull = false;
+
+	private Hack currentHack = null;
 
 	public static HackManager Instance(){
 		if (instance == null) {
@@ -47,6 +50,22 @@ public class HackManager {
 			}
 		}
 		return null;
+	}
+
+	public bool latestWasSuccesfull(){
+		return latestSuccesfull;
+	}
+
+	public void setSuccesfull(bool b){
+		this.latestSuccesfull = b;
+	}
+
+	public Hack getCurrentHack(){
+		return this.currentHack;
+	}
+
+	public void setCurrentHack(Hack hack){
+		this.currentHack = hack;
 	}
 
 }

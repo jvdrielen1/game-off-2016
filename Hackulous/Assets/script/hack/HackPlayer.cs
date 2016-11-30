@@ -38,9 +38,14 @@ public class HackPlayer : MonoBehaviour {
 			transform.position = new Vector3 (transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
 		}
 
+		if (Input.GetKey (KeyCode.O)) {
+			points++;
+		}
+
 		if (Mathf.Round(timeLeft) == 0) {
 			GameObject camera = GameObject.Find ("Main Camera");
 			SwitchScene s = camera.GetComponent<SwitchScene> ();
+			HackManager.Instance ().setSuccesfull (false);
 			s.openScene ("TextComposerScene");
 		}
 
@@ -48,9 +53,23 @@ public class HackPlayer : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll){
+		/*if (coll.gameObject.name == "Trail") {
+			GameObject camera = GameObject.Find ("Main Camera");
+			SwitchScene s = camera.GetComponent<SwitchScene> ();
+			HackManager.Instance ().setSuccesfull (false);
+			s.openScene ("TextComposerScene");
+		}*/
+
 		if (coll.gameObject.name == "Skull") {
 			points++;
 			coll.gameObject.transform.position = new Vector3(Random.Range(-7.8f, 7.8f), Random.Range(-2.9f, 5f), coll.gameObject.transform.position.z);
+
+			if (points >= pointsNeeded) {
+				GameObject camera = GameObject.Find ("Main Camera");
+				SwitchScene s = camera.GetComponent<SwitchScene> ();
+				HackManager.Instance ().setSuccesfull (true);
+				s.openScene ("TextComposerScene");	
+			}
 		}
 	}
 

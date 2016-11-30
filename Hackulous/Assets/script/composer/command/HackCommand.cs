@@ -24,6 +24,7 @@ public class HackCommand : CommandExecutor {
 				foreach (Hack hack in hacks){
 					if (hack.getId() == intId){
 						if (hack.canHack(player)){
+							hm.setCurrentHack(hack);
 							current = new HackingEvent(composer, hack);
 							composer.StartEvent(current);
 							return true;
@@ -63,7 +64,6 @@ public class HackCommand : CommandExecutor {
 				print ("  - Reward:<i> " + hack.getReward() + "$</i>");
 			}
 
-			print ("");
 			composer.setTypePermission (true);
 			return true;
 		}
@@ -76,6 +76,10 @@ public class HackCommand : CommandExecutor {
 
 	public void clearCurrent(){
 		this.current = null;
+	}
+
+	public HackingEvent getCurrentHackingEvent(){
+		return this.current;
 	}
 
 	public class HackingEvent : ComposerEvent {
@@ -99,18 +103,19 @@ public class HackCommand : CommandExecutor {
 				if (times == 20) {
 					composer.setCurrentText (composer.getCurrentText () + "]\n");
 					composer.setTypePermission (true);
-					Player player = GameManager.Instance ().getPlayer ();
-					/*player.setBalance (player.getBalance() + hack.getReward());
-					player.completeHack (hack.getId ());
-					player.addXp (50);
-					composer.CalculateLines ();
-					SaveGame.Save ();*/
+					//Player player = GameManager.Instance ().getPlayer ();
 					GameManager.Instance ().saveComposerState (composer.getCurrentText());
+					GameObject obj = GameObject.Find ("Main Camera");
+					obj.GetComponent<SwitchScene> ().openScene ("HackScene");
 					yield break;
 				}
 
 				yield return new WaitForSeconds (0.1f);
 			}
+		}
+
+		public Hack getHack(){
+			return this.hack;
 		}
 
 	}

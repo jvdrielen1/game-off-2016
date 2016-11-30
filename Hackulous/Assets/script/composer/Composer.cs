@@ -22,8 +22,11 @@ public class Composer : MonoBehaviour {
 
 	private GameObject continueButton;
 
+	private HackCommand hackCommand;
+
 	void Start () {
 		GameManager gm = GameManager.Instance ();
+		HackManager hm = HackManager.Instance ();
 		Player player = gm.getPlayer ();
 
 		if (player.isFirstTime) {
@@ -39,7 +42,7 @@ public class Composer : MonoBehaviour {
 		} else {
 			// Register commands
 			registerCommand ("help", new HelpCommand ());
-			registerCommand ("hack", new HackCommand ());
+			registerCommand ("hack", hackCommand = new HackCommand ());
 			registerCommand ("stats", new StatisticsCommand ());
 		}
 
@@ -51,7 +54,31 @@ public class Composer : MonoBehaviour {
 
 		if (gm.hasComposerSaveState ()) {
 			setCurrentText(gm.getComposerSaveState());
+			Hack hack = hm.getCurrentHack();
+			if (hack != null) {
+				if (hm.latestWasSuccesfull ()) {
+					player.addXp (50);
+					player.setBalance (player.getBalance() + hack.getReward());
+					player.completeHack (hack.getId ());
+					PrintLn ("> Hack completed.");
+					PrintLn ("> Job title: " + hack.getName ());
+					PrintLn ("> Reward: $" + hack.getReward ());
+					PrintLn ("> XP gained: " + 50);
+					PrintLn ("> XP needed for level up: " + (player.getXpNextLevel () - player.getXp ()));
+					PrintLn ("");
+				} else {
+					player.addXp (25);
+					PrintLn ("> Hack failed.");
+					PrintLn ("> Job title: " + hack.getName ());
+					PrintLn ("> Reward: $0");
+					PrintLn ("> XP gained: 25");
+					PrintLn ("> XP needed for level up: " + (player.getXpNextLevel () - player.getXp ()));
+					PrintLn ("");
+				}
+			}
+			canType = true;
 			gm.removeSaveState ();
+			hackCommand.clearCurrent ();
 		}
 	}
 
@@ -155,6 +182,7 @@ public class Composer : MonoBehaviour {
 	public void PrintLn(string msg){
 		currentText += "\n" + msg;
 		GetComponent<Text> ().text = this.currentText + (Mathf.Round(Time.time) % 2 == 0 ? "▇" : "");
+		CalculateLines ();
 	}
 
 	public void CalculateLines(){

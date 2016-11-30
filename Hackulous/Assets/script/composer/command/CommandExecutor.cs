@@ -11,6 +11,7 @@ public abstract class CommandExecutor {
 		GameObject composer = GameObject.Find("Composer");
 		Composer textWriter = composer.GetComponent<Composer> ();
 		textWriter.PrintLn(msg);
+		textWriter.CalculateLines ();
 	}
 
 }
